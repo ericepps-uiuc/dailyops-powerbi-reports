@@ -1,0 +1,87 @@
+{
+  "config": "{\"version\":\"5.44\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU04\",\"version\":\"5.45\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY23SU04",
+            "path": "BaseThemes/CY23SU04.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"144149f00e98909bbb9d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":996.9380315917375,\"y\":190.85578923589938,\"z\":1000,\"width\":203.7424058323208,\"height\":105.75941676792223,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Daily Ops Incident Records.TimeToReviewMax\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Daily Ops Incident Records\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToReviewMax\"},\"Name\":\"Daily Ops Incident Records.TimeToReviewMax\",\"NativeReferenceName\":\"Max Time to Review\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToReviewMax\"}}}]},\"columnProperties\":{\"Daily Ops Incident Records.TimeToReviewMax\":{\"displayName\":\"Max Time to Review\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"labels\":[{\"properties\":{\"labelPrecision\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Daily Ops Incident Records\"}},\"Property\":\"TimeToCreateMax\"}},\"type\":\"Advanced\",\"howCreated\":1,\"isHiddenInViewMode\":false}]",
+          "height": 105.76,
+          "width": 203.74,
+          "x": 996.94,
+          "y": 190.86,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"3780ec134aa2d0fafa7d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":793.1956257594168,\"y\":190.85578923589938,\"z\":2000,\"width\":203.7424058323208,\"height\":105.75941676792223,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Avg(Daily Ops Incident Records.TimeToReview)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Daily Ops Incident Records\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToReview\"}},\"Function\":1},\"Name\":\"Avg(Daily Ops Incident Records.TimeToReview)\",\"NativeReferenceName\":\"Avg Time to Review\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToReview\"}},\"Function\":1}}}]},\"columnProperties\":{\"Avg(Daily Ops Incident Records.TimeToReview)\":{\"displayName\":\"Avg Time to Review\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"labels\":[{\"properties\":{\"labelPrecision\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 105.76,
+          "width": 203.74,
+          "x": 793.20,
+          "y": 190.86,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"9926d14b808fd6ed76e1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.331713244228434,\"y\":0,\"z\":0,\"width\":726.318347509113,\"height\":720.0972053462941,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"columnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(Daily Ops Incident Records.TimeToCreate)\"},{\"queryRef\":\"Avg(Daily Ops Incident Records.TimeToReview)\"}],\"Category\":[{\"queryRef\":\"Daily Ops Incident Records.Created.Variation.Date Hierarchy.Year\",\"active\":true},{\"queryRef\":\"Daily Ops Incident Records.Created.Variation.Date Hierarchy.Quarter\",\"active\":true},{\"queryRef\":\"Daily Ops Incident Records.Created.Variation.Date Hierarchy.Month\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Daily Ops Incident Records\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToCreate\"}},\"Function\":1},\"Name\":\"Sum(Daily Ops Incident Records.TimeToCreate)\",\"NativeReferenceName\":\"Average of Time to Create\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToReview\"}},\"Function\":1},\"Name\":\"Avg(Daily Ops Incident Records.TimeToReview)\",\"NativeReferenceName\":\"Average of Time to Review\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"Created\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"},\"Name\":\"Daily Ops Incident Records.Created.Variation.Date Hierarchy.Year\",\"NativeReferenceName\":\"Created Year\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"Created\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Quarter\"},\"Name\":\"Daily Ops Incident Records.Created.Variation.Date Hierarchy.Quarter\",\"NativeReferenceName\":\"Created Quarter\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"Created\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Month\"},\"Name\":\"Daily Ops Incident Records.Created.Variation.Date Hierarchy.Month\",\"NativeReferenceName\":\"Created Month\"}]},\"columnProperties\":{\"Sum(Daily Ops Incident Records.TimeToCreate)\":{\"displayName\":\"Average of Time to Create\"},\"Avg(Daily Ops Incident Records.TimeToReview)\":{\"displayName\":\"Average of Time to Review\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Average Time to Create and Review'\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Daily Ops Time to Create/Review by Month'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"18D\"}}}}}],\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"5D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 720.10,
+          "width": 726.32,
+          "x": 9.33,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"a86dd3746cfb2048cd29\",\"layouts\":[{\"id\":0,\"position\":{\"x\":996.9380315917375,\"y\":48.213851761847515,\"z\":3000,\"width\":203.7424058323208,\"height\":105.75941676792223,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Daily Ops Incident Records.TimeToCreateMax\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Daily Ops Incident Records\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToCreateMax\"},\"Name\":\"Daily Ops Incident Records.TimeToCreateMax\",\"NativeReferenceName\":\"Max Time to Create\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToCreateMax\"}}}]},\"columnProperties\":{\"Daily Ops Incident Records.TimeToCreateMax\":{\"displayName\":\"Max Time to Create\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"labels\":[{\"properties\":{\"labelPrecision\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 105.76,
+          "width": 203.74,
+          "x": 996.94,
+          "y": 48.21,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"d8be964cf4e92f780751\",\"layouts\":[{\"id\":0,\"position\":{\"x\":793.1956257594168,\"y\":48.213851761847515,\"z\":4000,\"width\":203.7424058323208,\"height\":105.75941676792223,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Avg(Daily Ops Incident Records.TimeToCreate)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Daily Ops Incident Records\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToCreate\"}},\"Function\":1},\"Name\":\"Avg(Daily Ops Incident Records.TimeToCreate)\",\"NativeReferenceName\":\"Avg Time to Create\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToCreate\"}},\"Function\":1}}}]},\"columnProperties\":{\"Avg(Daily Ops Incident Records.TimeToCreate)\":{\"displayName\":\"Avg Time to Create\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 105.76,
+          "width": 203.74,
+          "x": 793.20,
+          "y": 48.21,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"fe00c61c73546fdfe57e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":828.9671931956258,\"y\":359.2709599027947,\"z\":5000,\"width\":354.60510328068045,\"height\":331.27582017010934,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Daily Ops Incident Records.Id\"},{\"queryRef\":\"Avg(Daily Ops Incident Records.TimeToCreate)\"},{\"queryRef\":\"Sum(Daily Ops Incident Records.TimeInDraft)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Daily Ops Incident Records\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Id\"},\"Name\":\"Daily Ops Incident Records.Id\",\"NativeReferenceName\":\"ID\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeToCreate\"}},\"Function\":1},\"Name\":\"Avg(Daily Ops Incident Records.TimeToCreate)\",\"NativeReferenceName\":\"Average of TimeToCreate\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"TimeInDraft\"}},\"Function\":1},\"Name\":\"Sum(Daily Ops Incident Records.TimeInDraft)\",\"NativeReferenceName\":\"Average of TimeInDraft\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Id\"}}}]},\"columnProperties\":{\"Avg(Daily Ops Incident Records.TimeToCreate)\":{\"displayName\":\"Days to Create\"},\"Sum(Daily Ops Incident Records.TimeInDraft)\":{\"displayName\":\"Days in Draft\"},\"Daily Ops Incident Records.Id\":{\"displayName\":\"ID\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"total\":[{\"properties\":{\"label\":{\"expr\":{\"Literal\":{\"Value\":\"'Average'\"}}}}}],\"columnFormatting\":[{\"properties\":{\"labelPrecision\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}},\"selector\":{\"metadata\":\"Sum(Daily Ops Incident Records.TimeInDraft)\"}},{\"properties\":{\"styleHeader\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Left'\"}}}},\"selector\":{\"metadata\":\"Daily Ops Incident Records.Id\"}}],\"grid\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"127.88699701831607D\"}}}},\"selector\":{\"metadata\":\"Sum(Daily Ops Incident Records.TimeInDraft)\"}}],\"columnHeaders\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Right'\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Current Draft Incident Records'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"18D\"}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"5D\"}}}}}],\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"subTitle\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filter078547a581185a82b1a2\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Daily Ops Incident Records\"}},\"Property\":\"Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Daily Ops Incident Records\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Draft'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 331.28,
+          "width": 354.61,
+          "x": 828.97,
+          "y": 359.27,
+          "z": 5000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}
