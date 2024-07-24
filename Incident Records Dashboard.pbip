@@ -3,7 +3,7 @@
   "artifacts": [
     {
       "report": {
-        "path": "DailyOps_v0.2.Report"
+        "path": "Incident Records Dashboard.Report"
       }
     }
   ],

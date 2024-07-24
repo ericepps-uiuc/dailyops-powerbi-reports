@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Incident Records Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "13e9521e-c4ae-42cc-9f61-c1d1caca1023"
+  }
+}

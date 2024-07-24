@@ -10,13 +10,26 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 0
+            "x": 397.50276243093924,
+            "y": 94.5
           },
-          "nodeIndex": "Daily Ops Incident Records",
-          "nodeLineageTag": "615f343e-cbad-4fe1-a151-eb689c246c7e",
+          "nodeIndex": "Incident_Records",
+          "nodeLineageTag": "e5fb034a-661a-4c7a-884d-657e2971114d",
           "size": {
-            "height": 426,
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 33.5
+          },
+          "nodeIndex": "Service_Teams",
+          "nodeLineageTag": "6d072b46-3f1e-482c-8992-b40790af6d7b",
+          "size": {
+            "height": 296,
             "width": 234
           },
           "zIndex": 0

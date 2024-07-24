@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Incident_Records\"]"
+        "value": "[\"Incident_Records\",\"Service_Teams\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1805.0 (23.12)"
+        "value": "2.131.1126.0 (24.07)"
       },
       {
         "name": "PBI_ProTooling",
@@ -25,9 +25,94 @@
         "name": "en-US",
         "linguisticMetadata": {
           "content": {
-            "DynamicImprovement": "HighConfidence",
+            "Entities": {
+              "incident_records.eventstart": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "EventStart"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Incident Record Range (by event start date)": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              },
+              "incident_records.service_teams_title": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "Service_Teams.Title"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Service": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              },
+              "incident_records.timetoreviewmax": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "TimeToReviewMax"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Max Days to Review": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              },
+              "incident_records.title": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "Title"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Incident Title": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              }
+            },
             "Language": "en-US",
-            "Version": "1.0.0"
+            "Version": "2.0.0"
           },
           "contentType": "json"
         }
@@ -296,6 +381,16 @@
       },
       {
         "name": "Incident_Records",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
         "columns": [
           {
             "name": "Id",
@@ -581,19 +676,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "ID 1",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "b81445df-233b-431f-8561-af0fc477cdd4",
-            "sourceColumn": "ID 1",
-            "summarizeBy": "none"
-          },
-          {
             "name": "Modified",
             "annotations": [
               {
@@ -843,7 +925,7 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "5b6efea4-db9a-446d-ac09-af8c5293f178",
+            "lineageTag": "4730d927-a78d-4d6c-9128-f95ead58fa8c",
             "sourceColumn": "Remediation",
             "summarizeBy": "none"
           },
@@ -856,8 +938,21 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "4f089e6b-339c-4b4c-b494-660f3fd0f070",
+            "lineageTag": "ed54d73e-365f-4b60-91aa-d1e29d825cba",
             "sourceColumn": "Remediation Details",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ID 1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5722807e-bce8-4b17-82bf-5760fff510c6",
+            "sourceColumn": "ID 1",
             "summarizeBy": "none"
           }
         ],
@@ -886,6 +981,18 @@
             "expression": "MIN('Incident_Records'[TimeToReview])",
             "formatString": "0",
             "lineageTag": "e50fd577-9e69-4756-8c68-35f7dd215366"
+          },
+          {
+            "name": "Max_TTR",
+            "expression": "if([TimeToReviewMax] > 10,[TimeToReviewMax],10)",
+            "formatString": "0",
+            "lineageTag": "804b528f-535a-4841-a976-33fadd998e3f"
+          },
+          {
+            "name": "Target_TTR",
+            "expression": "7",
+            "formatString": "0",
+            "lineageTag": "08c4aadf-573b-4094-94e5-b69cc7450774"
           }
         ],
         "partitions": [
@@ -895,13 +1002,19 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = PowerPlatform.Dataflows(null),",
-                "    Workspaces = Source{[Id=\"Workspaces\"]}[Data],",
-                "    #\"c6cd5968-74a6-471d-8c73-42895ffc57f2\" = Workspaces{[workspaceId=\"c6cd5968-74a6-471d-8c73-42895ffc57f2\"]}[Data],",
-                "    #\"fef47384-1899-48ff-9c81-bcddd4039655\" = #\"c6cd5968-74a6-471d-8c73-42895ffc57f2\"{[dataflowId=\"fef47384-1899-48ff-9c81-bcddd4039655\"]}[Data],",
-                "    Incident_Records_ = #\"fef47384-1899-48ff-9c81-bcddd4039655\"{[entity=\"Incident_Records\",version=\"\"]}[Data]",
+                "  Source = SharePoint.Tables(\"https://uillinoisedu.sharepoint.com/sites/TechnologyServicesDailyOps2\", [Implementation = null, ApiVersion = 15]),",
+                "  #\"Navigation 1\" = Source{[Id = \"e714ace2-c056-4a65-b392-a509fe20b4df\"]}[Items],",
+                "  #\"Removed columns\" = Table.RemoveColumns(#\"Navigation 1\", {\"FileSystemObjectType\", \"ServerRedirectedEmbedUri\", \"ServerRedirectedEmbedUrl\", \"ContentTypeId\", \"GUID\", \"ComplianceAssetId\", \"FirstUniqueAncestorSecurableObject\", \"RoleAssignments\", \"AttachmentFiles\", \"ContentType\", \"GetDlpPolicyTip\", \"FieldValuesAsHtml\", \"FieldValuesAsText\", \"FieldValuesForEdit\", \"File\", \"Folder\", \"LikedByInformation\", \"ParentList\", \"Properties\", \"Versions\", \"OData__ColorTag\", \"OData__UIVersionString\"}),",
+                "  #\"Expanded Ishikawa\" = Table.ExpandListColumn(#\"Removed columns\", \"Ishikawa\"),",
+                "  #\"Merged queries\" = Table.NestedJoin(#\"Expanded Ishikawa\", {\"Service - PrimId\"}, Service_Teams, {\"ID\"}, \"Service_Teams\", JoinKind.LeftOuter),",
+                "  #\"Expanded Service_Teams\" = Table.ExpandTableColumn(#\"Merged queries\", \"Service_Teams\", {\"Title\", \"tdx_owner\", \"tdx_primaryadmin\", \"tdx_otheradmins\", \"tdx_serviceliason\"}, {\"Service_Teams.Title\", \"Service_Teams.tdx_owner\", \"Service_Teams.tdx_primaryadmin\", \"Service_Teams.tdx_otheradmins\", \"Service_Teams.tdx_serviceliason\"}),",
+                "  #\"Transform columns\" = Table.TransformColumnTypes(#\"Expanded Service_Teams\", {{\"Id\", type text}, {\"Title\", type text}, {\"Status\", type text}, {\"Synopsis\", type text}, {\"OData_1-Customer Imp\", type text}, {\"OData_1-Support Tick\", type text}, {\"Ishikawa\", type text}, {\"OData_1-Remediation \", type text}, {\"OData_1-Remediation 0\", type text}, {\"OData_1-Corrective A\", type text}, {\"OData_1-Preventitive_x0020\", type text}, {\"Root Cause\", type text}, {\"Assigned ToId\", type text}, {\"Assigned ToStringId\", type text}, {\"EventStart\", type text}, {\"EventEnd\", type text}, {\"Review Date\", type text}, {\"Service - PrimId\", type text}, {\"Service - OtheId\", type text}, {\"Notes\", type text}, {\"Overview\", type text}, {\"ID\", type text}, {\"Modified\", type text}, {\"Created\", type text}, {\"AuthorId\", type text}, {\"EditorId\", type text}, {\"Attachments\", type text}, {\"Reminder-SendEmailCC\", type text}, {\"Reminder-SendDate\", type text}, {\"ReminderSendFlag\", type text}, {\"Service_Teams.Title\", type text}, {\"Service_Teams.tdx_owner\", type text}, {\"Service_Teams.tdx_primaryadmin\", type text}, {\"Service_Teams.tdx_otheradmins\", type text}, {\"Service_Teams.tdx_serviceliason\", type text}}),",
+                "  #\"Replace errors\" = Table.ReplaceErrorValues(#\"Transform columns\", {{\"Id\", null}, {\"Title\", null}, {\"Status\", null}, {\"Synopsis\", null}, {\"OData_1-Customer Imp\", null}, {\"OData_1-Support Tick\", null}, {\"Ishikawa\", null}, {\"OData_1-Remediation \", null}, {\"OData_1-Remediation 0\", null}, {\"OData_1-Corrective A\", null}, {\"OData_1-Preventitive_x0020\", null}, {\"Root Cause\", null}, {\"Assigned ToId\", null}, {\"Assigned ToStringId\", null}, {\"EventStart\", null}, {\"EventEnd\", null}, {\"Review Date\", null}, {\"Service - PrimId\", null}, {\"Service - OtheId\", null}, {\"Notes\", null}, {\"Overview\", null}, {\"ID\", null}, {\"Modified\", null}, {\"Created\", null}, {\"AuthorId\", null}, {\"EditorId\", null}, {\"Attachments\", null}, {\"Reminder-SendEmailCC\", null}, {\"Reminder-SendDate\", null}, {\"ReminderSendFlag\", null}, {\"Service_Teams.Title\", null}, {\"Service_Teams.tdx_owner\", null}, {\"Service_Teams.tdx_primaryadmin\", null}, {\"Service_Teams.tdx_otheradmins\", null}, {\"Service_Teams.tdx_serviceliason\", null}}),",
+                "  #\"Remove columns\" = Table.RemoveColumns(#\"Replace errors\", Table.ColumnsOfType(#\"Replace errors\", {type table, type record, type list, type nullable binary, type binary, type function})),",
+                "  #\"Renamed columns\" = Table.RenameColumns(#\"Remove columns\", {{\"OData_1-Remediation \", \"Remediation\"}, {\"OData_1-Remediation 0\", \"Remediation Details\"}, {\"ID\", \"ID 1\"}}),",
+                "  #\"Changed column type\" = Table.TransformColumnTypes(#\"Renamed columns\", {{\"Modified\", type datetime}, {\"Created\", type datetime}, {\"EventStart\", type datetime}, {\"EventEnd\", type datetime}, {\"Review Date\", type datetime}})",
                 "in",
-                "    Incident_Records_"
+                "  #\"Changed column type\""
               ],
               "type": "m"
             }
@@ -1912,6 +2025,161 @@
           }
         ],
         "showAsVariationsOnly": true
+      },
+      {
+        "name": "Service_Teams",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "22b47d6d-56b1-4659-b4e1-55d06e9c6d59",
+            "sourceColumn": "ID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Title",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "145a2282-d177-442d-a92d-f6c8f11c8507",
+            "sourceColumn": "Title",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AuthorId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bd80e747-aa07-4a38-bd8f-74ba75cb75a9",
+            "sourceColumn": "AuthorId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "EditorId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "59c4350a-2f81-4348-9548-62b968dc5ced",
+            "sourceColumn": "EditorId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tdx_owner",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "72ba02b5-5949-4db0-8117-e740bd034dd5",
+            "sourceColumn": "tdx_owner",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tdx_primaryadmin",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bf36f264-1f14-47c4-8ab4-f7012718c433",
+            "sourceColumn": "tdx_primaryadmin",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tdx_otheradmins",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "df625a5c-91a2-4926-982e-d46de208fe98",
+            "sourceColumn": "tdx_otheradmins",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tdx_serviceliason",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b75ab475-d93f-4700-a3e4-f85a4ddc4cf8",
+            "sourceColumn": "tdx_serviceliason",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Time",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3408108b-af85-48ad-8dbf-35e26ff84df4",
+            "sourceColumn": "Time",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "6d072b46-3f1e-482c-8992-b40790af6d7b",
+        "partitions": [
+          {
+            "name": "Service_Teams",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "  Source = SharePoint.Tables(\"https://uillinoisedu.sharepoint.com/sites/TechnologyServicesDailyOps2\", [Implementation = null, ApiVersion = 15]),",
+                "  #\"Navigation 1\" = Source{[Id = \"0c0b7063-673e-40b9-ac43-929a110b3604\"]}[Items],",
+                "  #\"Removed columns\" = Table.RemoveColumns(#\"Navigation 1\", {\"FileSystemObjectType\", \"ServerRedirectedEmbedUri\", \"ServerRedirectedEmbedUrl\", \"Id\", \"ContentTypeId\", \"Modified\", \"Created\", \"OData__UIVersionString\", \"Attachments\", \"GUID\", \"ComplianceAssetId\", \"OData__ColorTag\", \"RoleAssignments\", \"FirstUniqueAncestorSecurableObject\", \"AttachmentFiles\", \"ContentType\", \"GetDlpPolicyTip\", \"FieldValuesAsHtml\", \"FieldValuesAsText\", \"FieldValuesForEdit\", \"File\", \"Folder\", \"LikedByInformation\", \"ParentList\", \"Properties\", \"Versions\", \"Author\", \"Editor\"}),",
+                "  #\"Renamed columns\" = Table.RenameColumns(#\"Removed columns\", {{\"field_1\", \"tdx_owner\"}, {\"field_2\", \"tdx_primaryadmin\"}, {\"field_3\", \"tdx_otheradmins\"}, {\"field_4\", \"tdx_serviceliason\"}}),",
+                "  #\"Transform columns\" = Table.TransformColumnTypes(#\"Renamed columns\", {{\"ID\", type text}, {\"Title\", type text}, {\"AuthorId\", type text}, {\"EditorId\", type text}, {\"tdx_owner\", type text}, {\"tdx_primaryadmin\", type text}, {\"tdx_otheradmins\", type text}, {\"tdx_serviceliason\", type text}, {\"Time\", type text}}),",
+                "  #\"Replace errors\" = Table.ReplaceErrorValues(#\"Transform columns\", {{\"ID\", null}, {\"Title\", null}, {\"AuthorId\", null}, {\"EditorId\", null}, {\"tdx_owner\", null}, {\"tdx_primaryadmin\", null}, {\"tdx_otheradmins\", null}, {\"tdx_serviceliason\", null}, {\"Time\", null}}),",
+                "  #\"Changed column type\" = Table.TransformColumnTypes(#\"Replace errors\", {{\"ID\", Int64.Type}})",
+                "in",
+                "  #\"Changed column type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
       }
     ]
   }
