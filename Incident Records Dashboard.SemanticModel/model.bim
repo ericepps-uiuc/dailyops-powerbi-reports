@@ -47,6 +47,90 @@
                   }
                 ]
               },
+              "incident_records.incident_severity": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "Incident_Severity"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Incident Severity": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              },
+              "incident_records.ishikawa": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "Ishikawa"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Root Cause": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              },
+              "incident_records.odata_1customer_imp": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "OData_1-Customer Imp"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Customer Impact?": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              },
+              "incident_records.odata_1support_tick": {
+                "Definition": {
+                  "Binding": {
+                    "ConceptualEntity": "Incident_Records",
+                    "ConceptualProperty": "OData_1-Support Tick"
+                  }
+                },
+                "State": "Generated",
+                "Terms": [
+                  {
+                    "Support Tickets?": {
+                      "Source": {
+                        "Agent": "PowerBI.VisualColumnRename",
+                        "Type": "External"
+                      },
+                      "State": "Suggested",
+                      "Weight": 0.9
+                    }
+                  }
+                ]
+              },
               "incident_records.service_teams_title": {
                 "Definition": {
                   "Binding": {
@@ -78,7 +162,7 @@
                 "State": "Generated",
                 "Terms": [
                   {
-                    "Max Days to Review": {
+                    "Max Days to Complete": {
                       "Source": {
                         "Agent": "PowerBI.VisualColumnRename",
                         "Type": "External"
@@ -954,6 +1038,32 @@
             "lineageTag": "5722807e-bce8-4b17-82bf-5760fff510c6",
             "sourceColumn": "ID 1",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Service_Teams.Core_Service",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "15670fc2-8d21-4a29-85ed-a42c814fc3ae",
+            "sourceColumn": "Service_Teams.Core_Service",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Incident_Severity",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4780df24-2f2e-41eb-9a9a-38cc72f918bf",
+            "sourceColumn": "Incident_Severity",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "e5fb034a-661a-4c7a-884d-657e2971114d",
@@ -1007,14 +1117,15 @@
                 "  #\"Removed columns\" = Table.RemoveColumns(#\"Navigation 1\", {\"FileSystemObjectType\", \"ServerRedirectedEmbedUri\", \"ServerRedirectedEmbedUrl\", \"ContentTypeId\", \"GUID\", \"ComplianceAssetId\", \"FirstUniqueAncestorSecurableObject\", \"RoleAssignments\", \"AttachmentFiles\", \"ContentType\", \"GetDlpPolicyTip\", \"FieldValuesAsHtml\", \"FieldValuesAsText\", \"FieldValuesForEdit\", \"File\", \"Folder\", \"LikedByInformation\", \"ParentList\", \"Properties\", \"Versions\", \"OData__ColorTag\", \"OData__UIVersionString\"}),",
                 "  #\"Expanded Ishikawa\" = Table.ExpandListColumn(#\"Removed columns\", \"Ishikawa\"),",
                 "  #\"Merged queries\" = Table.NestedJoin(#\"Expanded Ishikawa\", {\"Service - PrimId\"}, Service_Teams, {\"ID\"}, \"Service_Teams\", JoinKind.LeftOuter),",
-                "  #\"Expanded Service_Teams\" = Table.ExpandTableColumn(#\"Merged queries\", \"Service_Teams\", {\"Title\", \"tdx_owner\", \"tdx_primaryadmin\", \"tdx_otheradmins\", \"tdx_serviceliason\"}, {\"Service_Teams.Title\", \"Service_Teams.tdx_owner\", \"Service_Teams.tdx_primaryadmin\", \"Service_Teams.tdx_otheradmins\", \"Service_Teams.tdx_serviceliason\"}),",
+                "  #\"Expanded Service_Teams\" = Table.ExpandTableColumn(#\"Merged queries\", \"Service_Teams\", {\"Title\", \"tdx_owner\", \"tdx_primaryadmin\", \"tdx_otheradmins\", \"tdx_serviceliason\", \"Core_Service\"}, {\"Service_Teams.Title\", \"Service_Teams.tdx_owner\", \"Service_Teams.tdx_primaryadmin\", \"Service_Teams.tdx_otheradmins\", \"Service_Teams.tdx_serviceliason\", \"Service_Teams.Core_Service\"}),",
                 "  #\"Transform columns\" = Table.TransformColumnTypes(#\"Expanded Service_Teams\", {{\"Id\", type text}, {\"Title\", type text}, {\"Status\", type text}, {\"Synopsis\", type text}, {\"OData_1-Customer Imp\", type text}, {\"OData_1-Support Tick\", type text}, {\"Ishikawa\", type text}, {\"OData_1-Remediation \", type text}, {\"OData_1-Remediation 0\", type text}, {\"OData_1-Corrective A\", type text}, {\"OData_1-Preventitive_x0020\", type text}, {\"Root Cause\", type text}, {\"Assigned ToId\", type text}, {\"Assigned ToStringId\", type text}, {\"EventStart\", type text}, {\"EventEnd\", type text}, {\"Review Date\", type text}, {\"Service - PrimId\", type text}, {\"Service - OtheId\", type text}, {\"Notes\", type text}, {\"Overview\", type text}, {\"ID\", type text}, {\"Modified\", type text}, {\"Created\", type text}, {\"AuthorId\", type text}, {\"EditorId\", type text}, {\"Attachments\", type text}, {\"Reminder-SendEmailCC\", type text}, {\"Reminder-SendDate\", type text}, {\"ReminderSendFlag\", type text}, {\"Service_Teams.Title\", type text}, {\"Service_Teams.tdx_owner\", type text}, {\"Service_Teams.tdx_primaryadmin\", type text}, {\"Service_Teams.tdx_otheradmins\", type text}, {\"Service_Teams.tdx_serviceliason\", type text}}),",
                 "  #\"Replace errors\" = Table.ReplaceErrorValues(#\"Transform columns\", {{\"Id\", null}, {\"Title\", null}, {\"Status\", null}, {\"Synopsis\", null}, {\"OData_1-Customer Imp\", null}, {\"OData_1-Support Tick\", null}, {\"Ishikawa\", null}, {\"OData_1-Remediation \", null}, {\"OData_1-Remediation 0\", null}, {\"OData_1-Corrective A\", null}, {\"OData_1-Preventitive_x0020\", null}, {\"Root Cause\", null}, {\"Assigned ToId\", null}, {\"Assigned ToStringId\", null}, {\"EventStart\", null}, {\"EventEnd\", null}, {\"Review Date\", null}, {\"Service - PrimId\", null}, {\"Service - OtheId\", null}, {\"Notes\", null}, {\"Overview\", null}, {\"ID\", null}, {\"Modified\", null}, {\"Created\", null}, {\"AuthorId\", null}, {\"EditorId\", null}, {\"Attachments\", null}, {\"Reminder-SendEmailCC\", null}, {\"Reminder-SendDate\", null}, {\"ReminderSendFlag\", null}, {\"Service_Teams.Title\", null}, {\"Service_Teams.tdx_owner\", null}, {\"Service_Teams.tdx_primaryadmin\", null}, {\"Service_Teams.tdx_otheradmins\", null}, {\"Service_Teams.tdx_serviceliason\", null}}),",
                 "  #\"Remove columns\" = Table.RemoveColumns(#\"Replace errors\", Table.ColumnsOfType(#\"Replace errors\", {type table, type record, type list, type nullable binary, type binary, type function})),",
                 "  #\"Renamed columns\" = Table.RenameColumns(#\"Remove columns\", {{\"OData_1-Remediation \", \"Remediation\"}, {\"OData_1-Remediation 0\", \"Remediation Details\"}, {\"ID\", \"ID 1\"}}),",
-                "  #\"Changed column type\" = Table.TransformColumnTypes(#\"Renamed columns\", {{\"Modified\", type datetime}, {\"Created\", type datetime}, {\"EventStart\", type datetime}, {\"EventEnd\", type datetime}, {\"Review Date\", type datetime}})",
+                "  #\"Changed column type\" = Table.TransformColumnTypes(#\"Renamed columns\", {{\"Modified\", type datetime}, {\"Created\", type datetime}, {\"EventStart\", type datetime}, {\"EventEnd\", type datetime}, {\"Review Date\", type datetime}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Changed column type\", \"Incident_Severity\", each if [#\"OData_1-Customer Imp\"] = \"No\" then \"2 - No Customer Impact\" else if [Service_Teams.Core_Service] = true then \"0 - Core Service, Customer Impact\" else \"1 - Customer Impact, Non-Core Service\")",
                 "in",
-                "  #\"Changed column type\""
+                "  #\"Added Custom\""
               ],
               "type": "m"
             }
