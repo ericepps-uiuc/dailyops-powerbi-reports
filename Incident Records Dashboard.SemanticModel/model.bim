@@ -2156,6 +2156,19 @@
             "lineageTag": "3408108b-af85-48ad-8dbf-35e26ff84df4",
             "sourceColumn": "Time",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Core_Service",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7b2a64a9-319f-4503-8e5f-1d00669b4830",
+            "sourceColumn": "Core_Service",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "6d072b46-3f1e-482c-8992-b40790af6d7b",
